@@ -11,8 +11,8 @@ export class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.jugadoresPath = "/api/players";
-   // this.userPath = "/api/users";
-  //  this.authPath = "/api/auth";
+    this.userPath = "/api/users";
+    this.authPath = "/api/auth";
     
     //Db connection
     this.dBConnection();
@@ -34,10 +34,10 @@ export class Server {
   }
 
   routes() {
-  //  this.app.use(this.authPath, router);
-   // this.app.use(this.userPath, userRouter);
-   // this.app.use(this.userPath, userRouter);
     this.app.use(this.jugadoresPath, jugadoresRouter);
+   this.app.use(this.authPath, router);
+   this.app.use(this.userPath, userRouter);
+  
   }
 
   async dBConnection() {
@@ -46,7 +46,7 @@ export class Server {
 
   listen() {
     this.app.listen(this.port, () => {
-      console.log(`Example app listening on port ${this.port}`);
+      console.log(`app listening on port ${this.port}`);
     });
   }
 }

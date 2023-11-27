@@ -1,10 +1,7 @@
 import mongoose from 'mongoose';
 
 const jugadorSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true
-  },
+ 
   nombre: {
     type: String,
     required: true
