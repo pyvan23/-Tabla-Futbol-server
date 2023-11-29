@@ -13,6 +13,7 @@ export const getJugadores = async (req, res) => {
 
   export const putJugadores = async (req, res) => {
     try {
+
       const jugadores = req.body; // Asumiendo que envías un arreglo de jugadores en el cuerpo de la solicitud.
       console.log('req body',req.body);
       if (!Array.isArray(jugadores) || jugadores.length === 0) {
@@ -20,20 +21,21 @@ export const getJugadores = async (req, res) => {
       }
   
       for (let jugadorData of jugadores) {
-        const { _id, puntos } = jugadorData;
-        console.log(jugadorData);
+        const { _id, puntos,gano } = jugadorData;
         
-        const jugador = await Jugador.findById(_id); // Encuentra el jugador por id.
+        const jugador = await Jugador.findById(_id); 
+        console.log(jugador);// Encuentra el jugador por id.
         if (!jugador) {
           console.error('Jugador no encontrado: ', _id);
           continue; // Continúa con el siguiente jugador si uno no se encuentra.
         }
-  
-        jugador.puntos += puntos; // Añade los puntos al jugador.
-        await jugador.save(); // Guarda el documento actualizado en la base de datos.
+       if(gano){
+        jugador.puntos += 3; 
+        jugador.gano = false; }
+        await jugador.save(); 
       }
   
-      res.status(200).json({ message: "Jugadores actualizados con éxito" });
+      res.status(200).json({ message: "Jugadores actualizados con éxito", });
     } catch (error) {
       res.status(500).send(error.message);
     }

@@ -30,6 +30,11 @@ const jugadorSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  gano: {
+    type: Boolean,
+    required: true,
+    default: 0
   }
 });
 
