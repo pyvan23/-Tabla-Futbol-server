@@ -26,7 +26,10 @@ export class Server {
 
   middlewares() {
     //cors
-    this.app.use(cors());
+    this.app.use(cors({
+      origin: 'https://master--tabla-front-app.netlify.app', // Especifica el dominio de tu frontend
+      credentials: true
+    }));
     //read and parse of body to json
     this.app.use(express.json());
     //public directorie
